@@ -1,147 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Finessefleet Foundation</title>
+  <meta charset="UTF-8">
+  <title>Orders | Finessefleet Foundation</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      font-size: 10pt;
+    }
+
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+
+      thead {
+        background: none !important;
+        color: black !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
 </head>
-<body class="font-sans">
-
-  <!-- Topmost Strip -->
-  <div class="bg-gray-100 text-black text-sm px-4 py-2 flex justify-between items-center">
-    <div>
-      <strong>फाईनेसफ्लीट फाउंडेशन | Finessefleet Foundation</strong>
-    </div>
-    <div class="space-x-4">
-      <span>Last Updated: 03-08-2025</span>
-      <a href="#" class="underline hover:text-blue-600">Screen Reader Access</a>
-      <a href="#" class="underline hover:text-blue-600">Skip to Main Content</a>
-    </div>
-  </div>
-
-  <!-- Navbar -->
-  <nav class="bg-sky-700 text-white">
-    <div class="max-w-screen-xl mx-auto px-4">
-      <div class="flex items-center justify-between h-12">
-        <ul class="flex space-x-6 text-sm font-medium">
-          <li><a href="#" class="hover:underline">Home</a></li>
-
-          <li class="relative group">
-            <a href="#" class="hover:underline">About Us</a>
-            <ul class="absolute hidden group-hover:block bg-white text-black mt-1 rounded shadow-md z-10 min-w-[200px]">
-              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Who's Who</a></li>
-              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Vision and Mission</a></li>
-              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Wings/Divisions in Foundation</a></li>
-              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Organizations under this Foundation</a></li>
-                            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Governance</a></li>
-
-            </ul>
-          </li>
-
-<!-- 
-          <li class="relative group">
-            <a href="#" class="hover:underline">Programmes & Initiatives</a>
-            <ul class="absolute hidden group-hover:block bg-white text-black mt-1 rounded shadow-md z-10 min-w-[250px]">
-              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Vidyasagar Learning Initiative (VLI)</a></li>
-              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">SkillHive</a></li>
-              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Turing Outreach Initiative (TOI)</a></li>
-              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Upcoming Programmes</a></li>
-            </ul>
-          </li> -->
-
-          <li><a href="notifications/orders/" class="hover:underline">O.M.s</a></li>
-
-          <!-- <li class="relative group">
-            <a href="#" class="hover:underline">Publications</a>
-            <ul class="absolute hidden group-hover:block bg-white text-black mt-1 rounded shadow-md z-10 min-w-[220px]">
-              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Annual Reports</a></li>
-              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Notifications & Circulars</a></li>
-              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Policy Papers & Guidelines</a></li>
-              <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Event Documents</a></li>
-            </ul>
-          </li> -->
-
-          <li class="relative group">
-  <a href="#" class="hover:underline">Notifications</a>
-  <ul class="absolute hidden group-hover:block bg-white text-black mt-1 rounded shadow-md z-10 min-w-[220px]">
-    <li><a href="notifications/orders/" class="block px-4 py-2 hover:bg-gray-100">Orders</a></li>
-
-  </ul>
-</li>
-
-<li class="relative group">
-  <a href="#" class="hover:underline">Statutory Disclosures</a>
-  <ul class="absolute hidden group-hover:block bg-white text-black mt-1 rounded shadow-md z-10 min-w-[220px]">
-    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Incorporation & others</a></li>
-    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Financial Statements</a></li>
-    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">MOUs & Agreements</a></li>
-  </ul>
-</li>
-
-<li class="relative group">
-  <a href="#" class="hover:underline">Downloads</a>
-  <ul class="absolute hidden group-hover:block bg-white text-black mt-1 rounded shadow-md z-10 min-w-[260px]">
-    <li><a href="downloads/forms-and-formats.html" class="block px-4 py-2 hover:bg-gray-100">Forms & Formats</a></li>
-    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Administrative Resources</a></li>
-  </ul>
-</li>
-
-
-          <li><a href="#" class="hover:underline">Contact Us</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-<div class="max-w-6xl mx-auto px-4 py-10">
-  <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2 mb-6">Office Memorandums (O.M.s)</h2>
-
-  <div class="overflow-x-auto">
-    <table class="min-w-full text-sm border border-gray-300 bg-white">
-      <thead class="bg-gray-100 text-left">
+<body class="bg-gray-100 text-gray-900 font-sans">
+  <div class="max-w-6xl mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold border-b pb-4 mb-6 print:text-xl">Orders</h1>
+    
+    <table class="w-full text-sm border border-gray-300 print:border-black">
+      <thead class="bg-blue-200 text-left print:bg-white print:text-black">
         <tr>
-          <th class="p-3 border border-gray-300">S. No.</th>
-          <th class="p-3 border border-gray-300">No.</th>
-          <th class="p-3 border border-gray-300">Subject</th>
-          <th class="p-3 border border-gray-300">Date</th>
-          <th class="p-3 border border-gray-300">PDF</th>
+          <th class="p-2 border print:border">F. No.</th>
+          <th class="p-2 border print:border">Date</th>
+          <th class="p-2 border print:border">Subject</th>
+          <th class="p-2 border print:border">Download</th>
         </tr>
       </thead>
-      <tbody>
-        <tr class="hover:bg-gray-50">
-          <td class="p-3 border border-gray-300">1</td>
-          <td class="p-3 border border-gray-300">12/68/2025-ASC</td>
-          <td class="p-3 border border-gray-300">Appointment of Additional Director (Admin.)</td>
-          <td class="p-3 border border-gray-300">03-08-2025</td>
-          <td class="p-3 border border-gray-300">
-            <a href="/documents/office-memorandums/OM-No-12-68-2025-ASC.pdf" class="text-blue-600 hover:underline" target="_blank">Download</a>
-          </td>
-        </tr>
-
-        <tr class="hover:bg-gray-50">
-          <td class="p-3 border border-gray-300">2</td>
-          <td class="p-3 border border-gray-300">A-11013/01-2025-Estt. B</td>
-          <td class="p-3 border border-gray-300">Guidelines for Probation Period Extension</td>
-          <td class="p-3 border border-gray-300">28-07-2025</td>
-          <td class="p-3 border border-gray-300">
-            <a href="/documents/office-memorandums/OM-No-09-34-2025-HR.pdf" class="text-blue-600 hover:underline" target="_blank">Download</a>
-          </td>
-        </tr>
-
-        <!-- Add more rows as needed -->
+      <tbody id="notification-table-body">
+        <!-- JS will populate this -->
       </tbody>
     </table>
   </div>
-</div>
 
-
-
-
-
-
-
-
-
+  <script>
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        const tbody = document.getElementById('notification-table-body');
+        data.forEach(entry => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td class="border p-2 print:border">${entry.number}</td>
+            <td class="border p-2 print:border">${entry.date}</td>
+            <td class="border p-2 print:border">${entry.subject}</td>
+            <td class="border p-2 print:border">
+              <a href="${entry.filename}" target="_blank" class="text-blue-700 underline print:text-black">PDF</a>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      })
+      .catch(err => {
+        document.getElementById('notification-table-body').innerHTML = `<tr><td colspan="4" class="p-4 text-red-600">Error loading data</td></tr>`;
+        console.error(err);
+      });
+  </script>
 </body>
 </html>
