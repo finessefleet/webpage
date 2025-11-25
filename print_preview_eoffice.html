@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Administrative Secretariat of Finessefleet Foundation</title>
+  <style>
+    :root{--page-width:210mm;--page-height:297mm;--page-margin:20mm}
+    body{font-family: "Times New Roman", Times, serif; margin:12px;background:#f3f3f3}
+    .toolbar{margin-bottom:10px}
+    button{padding:6px 10px;margin-right:6px}
+
+    /* editable area shown on screen (not the print preview window) */
+    #editorWrapper{background:white;border:1px solid #ccc;padding:18mm;box-shadow:0 0 6px rgba(0,0,0,0.06)}
+    #editor{min-height:420px;outline:none;font-family: "Times New Roman", Times, serif;font-size:12pt;line-height:1.35}
+
+    /* small helper to show how printed page will look on-screen */
+    .page-sample{width:calc(var(--page-width) * 0.35);height:calc(var(--page-height) * 0.35);background:white;border:1px solid #aaa;padding:var(--page-margin);box-sizing:border-box}
+    .muted{color:#555;font-size:0.9em}
+
+    /* Styles used inside the preview/print window (also injected by JS) */
+    /* Important: header and footer are fixed so they appear on each printed page in most browsers */
+    .print-container{width:var(--page-width);min-height:var(--page-height);margin:0 auto;box-sizing:border-box;padding:var(--page-margin) 0}
+    .print-header{position:fixed;left:0;right:0;top:0;height:24mm;padding:6mm  var(--page-margin);box-sizing:border-box;border-bottom:1px solid #ddd;background:white}
+    .print-footer{position:fixed;left:0;right:0;bottom:0;height:18mm;padding:4mm var(--page-margin);box-sizing:border-box;border-top:1px solid #ddd;background:white}
+    .print-body{margin-top:34mm;margin-bottom:28mm;padding:0 var(--page-margin);font-size:12pt;font-family: "Times New Roman", Times, serif;line-height:1.35;white-space:pre-wrap}
+
+    /* page numbering (may vary by browser) */
+    .pageno:before{content: counter(page)}
+
+    /* print-specific rules */
+    @media print{
+      body{background:white}
+      .print-header,.print-footer{position:fixed}
+      @page { size: A4; margin: 20mm }
+    }
+  </style>
+</head>
+<body>
+  <div style="text-align:center; font-family: 'Times New Roman', Times, serif; line-height:1.2; margin-bottom:12px;">
+  <div>F. No. <input type="text" id="fnoInput" style="border:1px solid #ccc; width:220px; font-family:'Times New Roman'; font-size:11pt;"> </div>
+  <div>Finessefleet Foundation</div>
+  <div>Administrative Secretariat</div>
+  <div>(Health Mission)</div>
+</div>
+<div style="text-align:right; font-family: 'Times New Roman', Times, serif; margin-bottom:18px;">Dated:
+  <input type="date" id="dateInput" style="border:1px solid #ccc; font-family:'Times New Roman'; font-size:11pt;">
+</div>
+<div style="font-weight:600; margin-bottom:12px; font-family:'Times New Roman', Times, serif;">Subject:
+  <input type="text" id="subjectInput" style="border:1px solid #ccc; width:420px; font-family:'Times New Roman'; font-size:11pt;">
+</div>
+  <div class="toolbar">
+    <button id="btnPreview">Open Print Preview</button>
+    <button id="btnOpenPreviewAndPrint">Preview & Print</button>
+    <button id="btnClear">Clear Body</button>
+    <span class="muted">Font: Times New Roman, 12pt (print)</span>
+  </div>
+
+  <div style="display:flex;gap:16px">
+    <div style="flex:1">
+      <div id="editorWrapper">
+        <div id="editor" contenteditable="true" aria-label="Document body" spellcheck="false">
+<p>Type the body of the document here. This editor uses Times New Roman, 12pt for print.</p>
+        </div>
+      </div>
+      <p class="muted">Tip: Use regular typing, carriage returns, and simple formatting. Complex styling in the editor may not always carry over to print.</p>
+    </div>
+    <div style="width:320px;">
+      <div class="page-sample" id="pageSample">
+        <div style="font-size:0.9em;color:#222;font-weight:600">Print page sample</div>
+        <hr>
+        <div class="muted" style="font-size:0.85em">Header & footer (system info) will appear on each printed page. Preview to confirm.</div>
+      </div>
+      <div style="margin-top:10px">
+        <label><input type="checkbox" id="chkIncludeUA" checked> Include system info (User-Agent)</label>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function getFullDateTime(){
+      try{
+        const now = new Date();
+        return new Intl.DateTimeFormat(undefined, {
+          weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+          hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short'
+        }).format(now);
+      }catch(e){ return (new Date()).toString(); }
+    }
+
+    const editor = document.getElementById('editor');
+    const fnoInput = document.getElementById('fnoInput');
+    const dateInput = document.getElementById('dateInput');
+    const subjectInput = document.getElementById('subjectInput');
+    const btnPreview = document.getElementById('btnPreview');
+    const btnPrintNow = document.getElementById('btnOpenPreviewAndPrint');
+    const btnClear = document.getElementById('btnClear');
+    const chkUA = document.getElementById('chkIncludeUA');
+
+    function openPreview(doAutoPrint=false){
+      const userAgent = navigator.userAgent;
+      const includeUA = chkUA.checked;
+      const dateTime = getFullDateTime();
+      const bodyHtml = editor.innerHTML;
+
+      const fnoVal = fnoInput.value || "";
+      const dateVal = dateInput.value ? new Date(dateInput.value).toLocaleDateString('en-IN', { day:'2-digit', month:'long', year:'numeric'}) : "";
+      const subjectVal = subjectInput.value || "";
+
+      const previewHtml = `<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Print Preview</title>
+<style>
+@page{ size:A4; margin: 25mm; }
+body{ font-family:"Times New Roman"; }
+.print-header{text-align:center; margin-bottom:15px;}
+.print-footer{position:fixed; bottom:0; left:0; right:0; text-align:right; font-size:11px;}
+.print-body{ margin-top:20px; white-space:pre-wrap; font-size:11pt; }
+.pageno:before{ counter-increment: page; content: counter(page); }
+</style>
+</head>
+<body>
+  <div class="print-header">
+    <div>F. No. ${fnoVal}</div>
+    <div>Finessefleet Foundation</div>
+    <div>Administrative Secretariat</div>
+    <div>(Health Mission)</div>
+    <div style="text-align:right; margin-top:6px;">Dated: ${dateVal}</div>
+    <div style="margin-top:10px; font-weight:bold; text-align:left;">Subject: ${subjectVal}</div>
+  </div>
+
+  <div class="print-body">${bodyHtml}</div>
+
+  <div class="print-footer">
+      <div style="float:left; font-size:11px;">Prepared on: ${dateTime}${includeUA ? ' — ' + userAgent : ''}</div>
+      <div style="float:right; font-size:11px;">Page <span class="pageno"></span></div>
+      <div style="clear:both"></div>
+  </div>
+</body>
+</html>`;
+
+      const w = window.open('', '_blank');
+      w.document.open();
+      w.document.write(previewHtml);
+      w.document.close();
+      w.focus();
+      if(doAutoPrint){ setTimeout(()=>{try{w.print();}catch(e){}}, 500); }
+    }
+
+    btnPreview.addEventListener('click',()=>openPreview(false));
+    btnPrintNow.addEventListener('click',()=>openPreview(true));
+
+</script>
+</body>
+</html>
